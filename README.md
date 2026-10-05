@@ -4,6 +4,10 @@ Campus Service Tracker is a small full-stack application for students to raise c
 
 It is intentionally built as a learning project: the backend and frontend are separated, the API is easy to trace, and the features are small enough to explain in an interview.
 
+## Repository history
+
+This is a synthetic sandbox project. Its initial commit history is for demonstration and does not represent the actual dates or sequence of development.
+
 ## Features
 
 - Student registration and JWT login
