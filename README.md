@@ -63,15 +63,28 @@ npm run dev
 
 The frontend starts at `http://localhost:5174` for the local development run and proxies `/api` requests to the backend.
 
-## Run with Docker
+## Deploy to Railway
 
-Requirements: Docker Desktop.
+This repository deploys as two Railway services from the same Git repository; Docker is not required.
 
-```bash
-docker compose up --build
-```
+1. Create a Railway project and add two services from this repository.
+2. For the **backend** service, set **Root Directory** to `/backend`. Generate a public domain, attach a volume at `/data`, then set these variables:
 
-Open `http://localhost:5173` after both containers are healthy.
+   ```text
+   DATA_DIR=/data
+   JWT_SECRET=<a unique secret of at least 32 characters>
+   FRONTEND_URL=<the public frontend URL>
+   ```
+
+3. For the **frontend** service, set **Root Directory** to `/frontend`, generate a public domain, and set:
+
+   ```text
+   VITE_API_URL=<the public backend URL>/api
+   ```
+
+4. Redeploy the frontend after adding `VITE_API_URL`; Vite injects this value during its build. Update `FRONTEND_URL` with the exact frontend URL if its Railway domain changes.
+
+The Railway configuration files pin the native Railpack build and production start commands for each service. See Railway's [monorepo deployment guide](https://docs.railway.com/deployments/monorepo) for the service setup.
 
 ## Validate the project
 
